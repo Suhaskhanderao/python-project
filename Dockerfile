@@ -1,6 +1,7 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim
 WORKDIR /app
-COPY . /app
-RUN pip install -r requirements.txt
+COPY ./app
+RUN pip install --nocache-dir -r requirements.txt
 EXPOSE 5000
-CMD ["python", "app.py"]
+ENV NAME World
+CMD ["python","app.py"]
