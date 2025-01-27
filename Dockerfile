@@ -1,12 +1,8 @@
-# Use the official Python image as the base
-FROM python:3.8-slim
-# Set the working directory
+FROM python:3.9-slim-buster
 WORKDIR /app
-# Copy the requirements file and install dependencies
-COPY . /app
-RUN pip install --no-cache-dir -r requirements.txt
-# Expose the port the app runs on
+COPY ./requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
+COPY . .
 EXPOSE 5000
-ENV NAME World
-# Set the command to run the application
-CMD ["python", "app.py"]
+ENV FLASK_APP=app.py
+CMD ["flask", "run", "--host=0.0.0.0"]
